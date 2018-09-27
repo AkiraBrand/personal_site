@@ -15,9 +15,17 @@ class HomepageTest < CapybaraTestCase
   # that the page doesn't exist.
 
   def test_user_sees_an_error_message_when_visiting_nonexistent_page
-    visit 'hello'
-    assert page.has_content?("page not found")
+    visit '/hello'
+
     assert_equal 404, page.status_code
+    assert page.has_content?("Page not found.")
+  end
+
+  def test_visiting_about_sends_me_to_about
+    visit '/about'
+
+    assert_equal 200, page.status_code
+    assert page.has_content?("About Me!")
   end
 
 end
